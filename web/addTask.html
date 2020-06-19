@@ -1,0 +1,14 @@
+<form onsubmit="addTask()">
+    <div class="form-group">
+        <label class="font-weight-bold" for="taskName">Task name</label>
+        <input required class="form-control" type="text" id="taskName" name="taskName">
+    </div>
+    <div class="form-group">
+        <label class="font-weight-bold" for="taskText">Task text</label>
+        <input required class="form-control" type="text" id="taskText" name="taskText">
+    </div>
+    <div class="text-center">
+        <input type="submit" value="Add" class="btn btn-success">
+        <button type="button" onclick="$('.tasks').load('../src/getTasks.php');" class="btn btn-danger">Cancel</button>
+    </div>
+</form>

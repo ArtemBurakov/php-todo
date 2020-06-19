@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready( () => {
+                //get all tasks
+                $('.tasks').load('../src/getTasks.php');
+            });
+
+            function deleteTask(id) {
+                let answer = window.confirm('Are you sure you want to delete this task?');
+                if (answer) {
+                    //send ajax request to delete task from database
+                    $.ajax({
+                        url: '../src/deleteTask.php',
+                        type: 'post',
+                        data: { taskId: id },
+                        success: function(response) {
+                            var jsonData = JSON.parse(response);
+                            if (jsonData.success == "1") {
+                                $('.tasks').load('../src/getTasks.php');
+                            } else {
+                                alert('Something went wrong!');
+                            }
+                        }
+                    });
+                }
+                return;
+            }
+
+            function addTask() {
+                $.ajax({
+                    url: '../src/addTask.php',
+                    type: 'post',
+                    data: { name: $('#taskName').val(), text: $('#taskText').val() },
+                    success: function(response) {
+                        var jsonData = JSON.parse(response);
+                        if (jsonData.success == "1") {
+                            alert('Task added successfully!');
+                        } else {
+                            alert('Something went wrong!');
+                        }
+                    }
+                });
+            }
+
+            function updateTask(id) {
+                $.ajax({
+                    url: '../src/updateTask.php',
+                    type: 'post',
+                    data: { taskId: id, taskName: $('#taskName').val(), taskText: $('#taskText').val() },
+                    success: function(response) {
+                        var jsonData = JSON.parse(response);
+                        if (jsonData.success == "1") {
+                            alert('Task updated successfully!');
+                        } else {
+                            alert('Something went wrong!');
+                        }
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="container p-1">
+                <a class="navbar-brand" href="index.html">Todo App</a>
+            </div>
+        </nav>
+
+        <!-- Main -->
+        <div class="container">
+            <div class="tasks"></div>
+        </div>
+    </body>
+</html>
