@@ -1,9 +1,9 @@
 <?php
-    include 'db-connect.php';
+require 'db-connect.php';
 
-    $sql = "SELECT `id`, `name`, `text`, status FROM $database";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
+$sql = "SELECT `id`, `name`, `text`, status FROM $database";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
 ?>
 <div class="addTask mb-3">
     <a class="btn btn-success text-white" onclick="$('.tasks').load('../web/addTask.html');">Add task +</a>
@@ -20,10 +20,10 @@
                 <td scope="col">Actions</td>
             </tr>
         </thead>
-    <?php
-        $i = 1;
-        while($row = $result->fetch_assoc()) {
-    ?>
+<?php
+$i = 1;
+while($row = $result->fetch_assoc()) {
+?>
         <tr>
             <td class="align-middle"><?= $i ?></td>
             <td class="align-middle"><?= $row['id'] ?></td>
@@ -36,14 +36,14 @@
                 <button type="button" class="btn btn-danger mb-1" onclick="deleteTask(<?= $row['id'] ?>);">Delete</button>
             </td>
         </tr>
-    <?php
-        $i++;
+<?php
+$i++;
         }
-    ?>
+?>
     </table>
 </div>
 <?php
-    } else {
+} else {
 ?>
 <div class="addTask mb-3">
     <a class="btn btn-success text-white" onclick="$('.tasks').load('addTask.html');">Add task +</a>
@@ -51,6 +51,6 @@
 <h4 class="text-center" ><?= 'You have 0 tasks' ?></h4>
 
 <?php
-    }
-    $conn->close();
+}
+$conn->close();
 ?>

@@ -1,6 +1,6 @@
 <?php
-    $id = $_POST['taskId'];
-    include 'getTaskInfo.php';
+$id = $_POST['taskId'];
+require 'getTaskInfo.php';
 ?>
 <form onsubmit="updateTask(<?= $id ?>);">
     <div class="form-group">

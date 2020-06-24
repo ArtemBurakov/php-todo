@@ -1,7 +1,7 @@
 <?php
-    $id = $_POST['taskId'];
+$id = $_POST['taskId'];
 
-    include 'getTaskInfo.php';
+require 'getTaskInfo.php';
 ?>
 <h3 class="taskName"><?= $name ?></h3>
 <div class="mb-4">

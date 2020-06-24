@@ -23,7 +23,7 @@
                             if (jsonData.success == "1") {
                                 $('.tasks').load('../src/getTasks.php');
                             } else {
-                                alert('Something went wrong!');
+                                alert('Something went wrong, try again!');
                             }
                         }
                     });
@@ -41,7 +41,7 @@
                         if (jsonData.success == "1") {
                             alert('Task added successfully!');
                         } else {
-                            alert('Something went wrong!');
+                            alert('Something went wrong, check your input data!');
                         }
                     }
                 });
@@ -57,7 +57,7 @@
                         if (jsonData.success == "1") {
                             alert('Task updated successfully!');
                         } else {
-                            alert('Something went wrong!');
+                            alert('Something went wrong, check your input data!');
                         }
                     }
                 });
